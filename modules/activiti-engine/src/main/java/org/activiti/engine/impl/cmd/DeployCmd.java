@@ -15,6 +15,7 @@ package org.activiti.engine.impl.cmd;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.activiti.engine.delegate.event.ActivitiEventType;
@@ -47,11 +48,15 @@ public class DeployCmd<T> implements Command<Deployment>, Serializable {
     deployment.setDeploymentTime(Context.getProcessEngineConfiguration().getClock().getCurrentTime());
 
     if ( deploymentBuilder.isDuplicateFilterEnabled() ) {
-      DeploymentEntity existingDeployment = Context
+      List<Deployment> deploymentList = Context
         .getCommandContext()
-        .getDeploymentEntityManager()
-        .findLatestDeploymentByName(deployment.getName());
+        .getProcessEngineConfiguration().getRepositoryService().createDeploymentQuery()
+        .deploymentName(deployment.getName())
+        .deploymentTenantId(deployment.getTenantId())
+        .orderByDeploymentId().desc().list();
       
+      DeploymentEntity existingDeployment = null;
+      if(!deploymentList.isEmpty()) existingDeployment = (DeploymentEntity) deploymentList.get(0);
       if ( (existingDeployment!=null)
            && !deploymentsDiffer(deployment, existingDeployment)) {
         return existingDeployment;
