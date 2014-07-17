@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions id="definitions" 
-  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
-  xmlns:activiti="http://activiti.org/bpmn"
-  targetNamespace="one"
-  xmlns:tns="one">
-  
-  <process id="processOne">
-  
-    <startEvent id="theStart" />
-    
-    <sequenceFlow id="flow1" sourceRef="theStart" targetRef="theEnd" />
-  
-    <endEvent id="theEnd" />
-    
-  </process>
-
-</definitions>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xmlns:tns="one" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="definitions" targetNamespace="one">
+  <bpmn2:process id="processOne" drools:version="1" drools:packageName="defaultPackage" drools:adHoc="false" isExecutable="true">
+    <bpmn2:startEvent id="theStart" name="">
+      <bpmn2:outgoing>tns:flow1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="flow1" drools:priority="1" name="" sourceRef="theStart" targetRef="theEnd"/>
+    <bpmn2:endEvent id="theEnd" name="">
+      <bpmn2:incoming>tns:flow1</bpmn2:incoming>
+    </bpmn2:endEvent>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_Process_1" bpmnElement="processOne">
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="theStart">
+        <dc:Bounds height="36.0" width="36.0" x="50.0" y="50.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="theEnd">
+        <dc:Bounds height="36.0" width="36.0" x="136.0" y="50.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="flow1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_EndEvent_1">
+        <di:waypoint xsi:type="dc:Point" x="86.0" y="68.0"/>
+        <di:waypoint xsi:type="dc:Point" x="108.0" y="68.0"/>
+        <di:waypoint xsi:type="dc:Point" x="108.0" y="68.0"/>
+        <di:waypoint xsi:type="dc:Point" x="136.0" y="68.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
